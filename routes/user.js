@@ -11,7 +11,7 @@ userRouter.post("/register", async(req, res)=> {
     try {
         const ispresent = await UserModel.findOne({ email })
         if(ispresent){
-            return res.status(400).json({ message : 'user already exist...please login directly!' })
+            return res.status(400).json({ msg : 'user already exist...' })
         }
 
         const user = new UserModel({ username, email })
