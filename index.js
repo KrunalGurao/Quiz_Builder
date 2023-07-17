@@ -1,6 +1,7 @@
 const express = require("express");
 const { connection } = require('./db');
 const { userRouter } = require("./routes/user");
+const { quizRouter } = require("./routes/quiz");
 const cors = require("cors");
 require("dotenv").config();
 
@@ -13,8 +14,8 @@ app.use(cors());
 
 
 
-app.use("user", userRouter);
-
+app.use("/user", userRouter);
+app.use("/quiz",quizRouter);
 
 
 
