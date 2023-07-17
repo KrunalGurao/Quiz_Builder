@@ -1,9 +1,10 @@
 const express = require('express');
 const quizRouter = express.Router();
 const Quiz = require('../model/quiz');
+const cors = require('cors')
 
 
-
+quizRouter.use(cors())
 
 quizRouter.post('/create', async (req, res) => {
   try {
@@ -21,10 +22,10 @@ quizRouter.post('/create', async (req, res) => {
 
 
 
-quizRouter.delete('/:quizId', async (req, res) => {
+quizRouter.delete('/:id', async (req, res) => {
   try {
-    const { quizId } = req.params;
-    await Quiz.findByIdAndDelete(quizId);
+    const { id } = req.params;
+    await Quiz.findByIdAndDelete(id);
     res.status(200).end();
   } catch (error) {
     res.status(400).json({ error: 'Error occured' });
@@ -37,12 +38,12 @@ quizRouter.delete('/:quizId', async (req, res) => {
 
 
 
-quizRouter.put('/:quizId', async (req, res) => {
+quizRouter.put('/:id', async (req, res) => {
   try {
-    const { quizId } = req.params;
+    const { id } = req.params;
     const { title, description } = req.body;
     const quiz = await Quiz.findByIdAndUpdate(
-      quizId,
+      id,
       { title, description },
       { new: true }
     );
@@ -51,6 +52,21 @@ quizRouter.put('/:quizId', async (req, res) => {
     res.status(400).json({ error: 'Error occured' });
   }
 });
+
+
+//************************************************************************************** */
+
+
+quizRouter.get('/quiz',async (req, res) => {
+    try{
+        const quizzes = await Quiz.find();
+        res.status(200).json(quizzes);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+        res.status(400).json({ 'message': 'Failed to retrieve quiz data'});
+    }
+})
+
 
 
 
