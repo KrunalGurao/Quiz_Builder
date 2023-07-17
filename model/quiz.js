@@ -42,4 +42,4 @@ function arrayLimit(ele) {
 
 const Quiz = mongoose.model('Quiz', quizSchema);
 
-module.exports = {Quiz};
+module.exports = Quiz;

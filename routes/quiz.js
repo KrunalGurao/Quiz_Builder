@@ -12,9 +12,10 @@ quizRouter.post('/create', async (req, res) => {
     const quiz = await Quiz.create({ creator, title, description, questions });
     res.status(200).json(quiz);
   } catch (error) {
-    res.status(400).json({ "message": 'Error occured' });
+    res.status(400).json(error);
   }
 });
+
 
 
 
@@ -62,8 +63,7 @@ quizRouter.get('/quiz',async (req, res) => {
         const quizzes = await Quiz.find();
         res.status(200).json(quizzes);
     } catch (error) {
-        res.status(400).json({ message: error.message });
-        res.status(400).json({ 'message': 'Failed to retrieve quiz data'});
+        res.status(400).json('Failed to retrieve quiz data');
     }
 })
 
