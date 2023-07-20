@@ -9,7 +9,7 @@ quizRouter.use(cors())
 quizRouter.post('/create', async (req, res) => {
   try {
     const { creator, title, description, questions } = req.body;
-    const quiz = await Quiz.create({ creator, title, description, questions });
+    const quiz = new Quiz({ creator, title, description, questions });
     res.status(200).json(quiz);
   } catch (error) {
     res.status(400).json(error);
